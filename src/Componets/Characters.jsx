@@ -42,7 +42,7 @@ const Characters = ({ resident }) => {
         <p className='colorText'> Gender </p>
         <p> <b>{getResidents.gender}</b></p>
         <div className="state">
-          <div style={{ background: changeColor }} red id='icon'></div>
+          <div style={{ background: changeColor }} id='icon'></div>
           <p>  {getResidents.status} - {getResidents.species}</p>
         </div>
         <p className='colorText'>Origin </p>
