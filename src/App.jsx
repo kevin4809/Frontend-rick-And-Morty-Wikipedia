@@ -10,27 +10,30 @@ const App = () => {
   const [allLocation, setAllLocation] = useState({});
   const [selectLocation, setSelectLocation] = useState({});
   const [isShowing, setiIsShowing] = useState(false);
-  let tempAllLocation = []
 
 
-  const getAllLocation = (next) => {
-
-    //se revisa si no hay mas paginas de siguiente en la Api
-    if (!next) {
-      setAllLocation(tempAllLocation)
-      return
-    }
-
-    //almacenamos los nuevos elementos de la pagina actual
-    axios.get(next)
-      .then(res => {
-        res.data?.results.map(e => tempAllLocation.push(e))
-        getAllLocation(res.data?.info.next)
-      })
-  }
 
   //Peticion a la api de toda la informacion
   useEffect(() => {
+
+    let tempAllLocation = []
+
+    const getAllLocation = (next) => {
+
+      //se revisa si no hay mas paginas de siguiente en la Api
+      if (!next) {
+        setAllLocation(tempAllLocation)
+        return
+      }
+
+      //almacenamos los nuevos elementos de la pagina actual
+      axios.get(next)
+        .then(res => {
+          res.data?.results.map(e => tempAllLocation.push(e))
+          getAllLocation(res.data?.info.next)
+        })
+    }
+
 
     getAllLocation('https://rickandmortyapi.com/api/location')
 
@@ -44,6 +47,7 @@ const App = () => {
   const onChangeSearch = (e) => {
     const result = allLocation.filter(x => x.name.toLowerCase().startsWith(e.toLowerCase()))
     setLocation(result)
+
   }
 
   //Optiene el id para luego setearlo en el setSelectLocation
