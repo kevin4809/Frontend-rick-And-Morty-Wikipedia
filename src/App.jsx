@@ -34,14 +34,17 @@ const App = () => {
         })
     }
 
-
     getAllLocation('https://rickandmortyapi.com/api/location')
 
     //Mandamos un apeticion a la api para colocar la primera locacion aleatorio 
     let randomNumber = Math.floor(Math.random() * 126)
     axios.get(`https://rickandmortyapi.com/api/location/${randomNumber}`)
       .then(res => setSelectLocation(res.data))
+
   }, [])
+
+
+  console.log(allLocation)
 
   //Encuetra las concidencias con lo que los que ese esta buscando con los resultados del input de la busqueda 
   const onChangeSearch = (e) => {
@@ -52,7 +55,6 @@ const App = () => {
 
   //Optiene el id para luego setearlo en el setSelectLocation
   const getIds = (id) => {
-
     const found = allLocation.find(e => e.id === id)
     setSelectLocation(found)
     setiIsShowing(false)
@@ -93,6 +95,7 @@ const App = () => {
           ))}
         </div>
       </div>
+
     </div>
   )
 }
